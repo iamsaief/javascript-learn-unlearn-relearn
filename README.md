@@ -1,10 +1,46 @@
+<div align="center">
+  <img height="60" src="https://img.icons8.com/color/344/javascript.png">
+  <h1>Learn Unlearn Relearn JavaScript 🔄</h1>
+</div>
 
-# Lets Learn-Unlearn-Relearn JavaScript 🔄
+<p align="center">
+Test how well you know JavaScript, refresh your knowledge or prepare yourself for coding interview! 💪 <br/>
+Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽. <br/>
+I've created those for fun. If you find it helpful, I would really appreciate a reference to this repo. Best of luck! 👍
+</p>
 
-<details><summary style="font-size: 1.5rem;"><h2>1. 🧐 Understanding `Truthy` and `Falsy` in JavaScript</h2></summary>
-<p>
+<p align="center">
+💬 In case you want to reach out or just say hi, ↩️ <br/>
+<a href="https://www.facebook.com/saiefalemon">Facebook</a> | <a href="https://www.linkedin.com/in/saiefalemon">LinkedIn</a> | <a href="https://www.iamsaief.com/">Blog</a>
+</p>
 
-### ✅ **Primitive Types**:
+- [1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript](#1--understanding-truthy-and-falsy-in-javascript)
+  - [✅ Primitive Types](#primitive-types)
+  - [✅ Reference Types](#reference-types)
+  - [🤔 Why are Function Constructors Truthy?](#why-are-function-constructors-truthy)
+  - [✨ Simple Analogy](#-simple-analogy)
+- [2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript](#2--understanding-prototypal-inheritance-in-javascript)
+  - [💡Simple Analogy](#simple-analogy)
+  - [📝 Handle with Care](#handle-with-care)
+  - [🎓 The Takeaway](#the-takeaway)
+- [3. 🤝 What Are Promises in JavaScript?](#3-what-are-promises-in-javascript)
+  - [✨ Simple Analogy](#simple-analogy-1)
+- [4. 🗃️ What Are Closures in JavaScript?](#4-️what-are-closures-in-javascript)
+  - [🧩 Simple Analogy: The Picnic Basket](#-simple-analogy-the-picnic-basket)
+  - [🔥 Use Cases and Benefits](#use-cases-and-benefits)
+
+
+<!-- ---
+
+Available Translations: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
+
+--- -->
+
+## 1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript
+
+<details><summary><b>Click to expand details</b></summary>
+
+### ✅ Primitive Types
 
 - 💡 Represent single, immutable values. Primitive types in JavaScript include `undefined`, `null`, `boolean`, `number`, `string`, `symbol`, and `BigInt`.
 
@@ -12,7 +48,7 @@
 
 - 💡 They are stored directly in the location where the variable accesses them.
 
-### ✅ **Reference Types**:
+### ✅ Reference Types
 
 - 💡 Include objects such as `function`, `array`, and other `objects`, and they are mutable.
 
@@ -20,7 +56,7 @@
 
 - 💡 Since a reference points to an object, and objects in JavaScript are inherently truthy, a reference type cannot be falsy. Even if an object is empty (like `{}`) or an array has no elements (`[]`), it is still truthy because a reference to an allocated memory space exists.
 
-### **🤔 Why are Function Constructors Truthy?**
+### 🤔 Why are Function Constructors Truthy?
 
 - 💡 Function constructors like `new Number()` or `new Boolean()` create object wrappers around primitive values.
 
@@ -28,18 +64,16 @@
 
 - 💡 As we’ve established, reference types are always truthy because they refer to a memory location, not the value itself.
 
-### ✨ **Simple Analogy**
+### ✨ Simple Analogy
 
 Think of primitive types as individual pieces of paper with something written on them. If the paper is blank (a falsy value), it’s like having nothing or false. Reference types, on the other hand, are like folders (objects) that can hold these papers. Even if the folder is designed to hold a blank paper, the folder itself still exists and is something (truthy). The function constructors like `new Number()` and `new Boolean()` are like special folders that come with a label and even if the label says `0` or `false` (falsy), the folder is still an item you can reference and use (truthy).
 
 🧠 Remember, in JavaScript, the type of value determines its **truthiness** or **falsiness**. Objects will always be your go-to for a guaranteed truthy value!
 
-</p>
 </details>
 
----
-
-<details><summary style="font-size: 1.5rem;"><h2>2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript</h2></summary>
+## 2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript
+<details><summary><b>Click to expand details</b></summary>
 <p>
 
 In JavaScript, a ’prototype’ is like a blueprint for creating objects. It’s an object itself, and every function in JavaScript has a prototype property that’s used when creating new objects. This prototype object includes properties and methods that should be available to the objects created from the function.
@@ -55,14 +89,14 @@ Imagine you have a recipe for a cake. This recipe includes all the steps and ing
 ### 📝 Handle with Care
 While it’s tempting to keep adding to prototypes, it’s generally not recommended because it can lead to unexpected behavior in code, especially if libraries or frameworks are used that might also modify the prototype. Remember that with great power comes great responsibility.
 
-### 🎓 The Takeaway:
+### 🎓 The Takeaway
 Prototypal inheritance is a powerful feature in JavaScript that allows objects to share and extend behaviors efficiently. It’s what makes JavaScript dynamic and flexible, enabling us to write more reusable and maintainable code.
 
 ✨ So, the next time you’re working with JavaScript objects, remember the family tree of prototypes and how it empowers your code with shared DNA.
 
 __🧠 Now that we have basic understanding, lets go through the following examples.__
 
-### Example: Barking Dog
+**Example: Barking Dog**
 
 ```jsx
 class Dog {
@@ -82,7 +116,7 @@ pet.bark(); // Outputs: Woof I am Mara
 
 **Explanation:** A `Dog` class is created with a constructor to assign the name to the dog. A method `bark` is added to `Dog`’s prototype, which allows all instances of `Dog` to use this method. A new instance of `Dog` named ‘Mara’ is created, and `pet.bark()` is called, which outputs “Woof I am Mara”.
 
-### Example: String.prototype
+**Example: String.prototype**
 
 ```jsx
 // Adding a method to String.prototype
@@ -96,7 +130,7 @@ console.log(greeting.shout()); // Outputs: HELLO!!!
 
 **Explanation:** Here, we add a method called `shout` to `String.prototype`. This means every string created in JavaScript will now have access to this `shout` method. The method converts the string to uppercase and adds exclamation marks.
 
-### Example: Array.prototype
+**Example: Array.prototype**
 
 ```jsx
 // Adding a method to Array.prototype
@@ -110,7 +144,7 @@ console.log(numbers.firstElement()); // Outputs: 1
 
 **Explanation:** We add a method called `firstElement` to `Array.prototype`. This method returns the first element of an array if it exists. Now, any array we create will have this `firstElement` method available.
 
-### Example: Object.prototype
+**Example: Object.prototype**
 
 ```jsx
 // Adding a method to Object.prototype
@@ -127,11 +161,9 @@ console.log(person.keysCount()); // Outputs: 2
 </p>
 </details>
 
----
+## 3. 🤝 What Are Promises in JavaScript?
 
-
-
-<details><summary style="font-size: 1.5rem;"><h2>3. 🤝 What Are Promises in JavaScript?</h2></summary>
+<details><summary><b>Click to expand details</b></summary>
 <p>
 
 A promise is a special JavaScript object that connects the “producing code” (which performs an asynchronous operation) with the “consuming code” (which handles the result of that operation). Think of it as a subscription list: the promise ensures that the result will be available to all subscribed code when it’s ready.
@@ -166,7 +198,7 @@ Imagine you’re making a reservation at a restaurant for your niece’s birthda
 
 **🕹️ Now that we have basic understanding, lets go through the following examples.**
 
-### Example of creating and using a promise:
+**Example: creating and using a promise**
 
 ```jsx
 // Creating a promise
@@ -204,7 +236,7 @@ reservationPromise
 
 ---
 
-### Example of using **async/await** with the **Fetch API** to retrieve data from an external resource
+**Example: using __async/await__ with __Fetch API__**
 
 ```jsx
 async function getData() {
@@ -247,14 +279,15 @@ try {
 </p>
 </details>
 
----
+## 4. 🗃️ What Are Closures in JavaScript?
 
-<details><summary style="font-size: 1.5rem;"><h2>4. 🗃️ What Are Closures in JavaScript?</h2></summary>
+<details><summary><b>Click to expand details</b></summary>
+
 <p>
 
 A closure is a fundamental concept in JavaScript. It occurs when a function “remembers” its lexical scope even after it has finished executing. In simpler terms, a closure allows a function to retain access to variables from its outer (enclosing) function, even when that outer function has completed execution.
 
-### **🧩 Simple Analogy: The Picnic Basket**
+### 🧩 Simple Analogy: The Picnic Basket
 
 Imagine you’re going on a picnic with friends. You pack a picnic basket with all the essentials: sandwiches, fruits, drinks, and utensils. As you head to the park, you carry the basket with you. Now, here’s the interesting part: the basket itself is like a closure!
 
@@ -274,7 +307,7 @@ Imagine you’re going on a picnic with friends. You pack a picnic basket with a
     - ✨ The inner function references variables from the outer function.
     - ✨ The inner function is returned or passed as an argument to other functions.
 
-### **🔥 Use Cases and Benefits**
+### 🔥 Use Cases and Benefits
 
 - **ℹ️ Data Privacy:**
     - ✨ By enclosing variables within a closure, you create private variables.
@@ -349,7 +382,7 @@ let countClicks = (function() {
 document.getElementById('myButton').addEventListener('click', countClicks);
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - The `countClicks` IIFE (Immediately Invoked Function Expression) creates a private `count` variable for counting clicks.
 - The returned function is used as an event handler for clicks, which increments the count and logs it to the console.
@@ -375,5 +408,3 @@ delayedAlert('Hello after 2 seconds', 2000);
 
 </p>
 </details>
-
----
