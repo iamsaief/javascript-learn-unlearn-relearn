@@ -4,9 +4,10 @@
 </div>
 
 <p align="center">
-Test how well you know JavaScript, refresh your knowledge or prepare yourself for coding interview! 💪 <br/>
+Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 <br/>
 Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽. <br/>
-I've created those for fun. If you find it helpful, I would really appreciate a reference to this repo. Best of luck! 👍
+I've created this for fun. If you find it helpful, I would really appreciate a ⭐️ or reference to this repo. <br/> 
+Best of luck! 🙏 Happy coding! 🧑‍💻
 </p>
 
 <p align="center">
@@ -20,11 +21,12 @@ I've created those for fun. If you find it helpful, I would really appreciate a 
   - [🤔 Why are Function Constructors Truthy?](#why-are-function-constructors-truthy)
   - [✨ Simple Analogy](#-simple-analogy)
 - [2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript](#2--understanding-prototypal-inheritance-in-javascript)
-  - [💡Simple Analogy](#simple-analogy)
+  - [💡Simple Analogy: Recipe for a Cake](#simple-analogy-recipe-for-a-cake)
   - [📝 Handle with Care](#handle-with-care)
   - [🎓 The Takeaway](#the-takeaway)
 - [3. 🤝 What Are Promises in JavaScript?](#3-what-are-promises-in-javascript)
-  - [✨ Simple Analogy](#simple-analogy-1)
+  - [✨ Simple Analogy: Restaurant Reservation](#simple-analogy-restaurant-reservation)
+  - [🧩 Key concepts of promises](#-key-concepts-of-promises)
 - [4. 🗃️ What Are Closures in JavaScript?](#4-️what-are-closures-in-javascript)
   - [🧩 Simple Analogy: The Picnic Basket](#-simple-analogy-the-picnic-basket)
   - [🔥 Use Cases and Benefits](#use-cases-and-benefits)
@@ -78,7 +80,7 @@ Think of primitive types as individual pieces of paper with something written on
 
 In JavaScript, a ’prototype’ is like a blueprint for creating objects. It’s an object itself, and every function in JavaScript has a prototype property that’s used when creating new objects. This prototype object includes properties and methods that should be available to the objects created from the function.
 
-### 💡Simple Analogy
+### 💡Simple Analogy: Recipe for a Cake
 
 Imagine you have a recipe for a cake. This recipe includes all the steps and ingredients you need to make the cake. In JavaScript, the recipe is like the ’prototype’. When you bake a cake using this recipe, the cake (an ‘object’) inherits all the properties from the recipe (the ‘prototype’). If you decide to add a new step to the recipe, like adding icing, all the cakes made from that recipe will now have icing too.
 
@@ -168,7 +170,7 @@ console.log(person.keysCount()); // Outputs: 2
 
 A promise is a special JavaScript object that connects the “producing code” (which performs an asynchronous operation) with the “consuming code” (which handles the result of that operation). Think of it as a subscription list: the promise ensures that the result will be available to all subscribed code when it’s ready.
 
-### ✨ Simple Analogy
+### ✨ Simple Analogy: Restaurant Reservation
 
 Imagine you’re making a reservation at a restaurant for your niece’s birthday party next week. When you make the reservation, the restaurant gives you a promise that a table will be available for you at the specified time. In this analogy:
 
@@ -176,7 +178,7 @@ Imagine you’re making a reservation at a restaurant for your niece’s birthda
 
 - **👉 Promise:** The reservation itself acts as the promise. It ensures that the table will be ready for your party when you arrive.
 
-**🧩 Now, let’s break down the key concepts of promises:**
+### 🧩 Key concepts of promises
 
 1. **States of a Promise:**
 
