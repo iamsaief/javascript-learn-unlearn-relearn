@@ -1,13 +1,12 @@
 <div align="center">
   <img height="60" src="https://img.icons8.com/color/344/javascript.png">
-  <h1>Learn Unlearn Relearn JavaScript 🔄</h1>
+  <h1>Learn-Unlearn-Relearn JavaScript 🔄</h1>
 </div>
 
 <p align="center">
-Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 <br/>
-Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽. <br/>
-I've created this for fun. If you find it helpful, I would really appreciate a ⭐️ or reference to this repo. <br/> 
-Best of luck! 🙏 Happy coding! 🧑‍💻
+Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽. <br/>
+I've created this for free-time fun, Please forgive the mistakes. If you find it helpful, I would really appreciate a ⭐️ or a reference to this repo. <br/> 
+Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
 </p>
 
 <p align="center">
@@ -15,11 +14,13 @@ Best of luck! 🙏 Happy coding! 🧑‍💻
 <a href="https://www.facebook.com/saiefalemon">Facebook</a> | <a href="https://www.linkedin.com/in/saiefalemon">LinkedIn</a> | <a href="https://www.iamsaief.com/">Blog</a>
 </p>
 
+---
+
 - [1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript](#1--understanding-truthy-and-falsy-in-javascript)
   - [✅ Primitive Types](#primitive-types)
   - [✅ Reference Types](#reference-types)
   - [🤔 Why are Function Constructors Truthy?](#why-are-function-constructors-truthy)
-  - [✨ Simple Analogy](#-simple-analogy)
+  - [✨ Simple Analogy: Folder-Paper](#-simple-analogy-folder-paper)
 - [2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript](#2--understanding-prototypal-inheritance-in-javascript)
   - [💡Simple Analogy: Recipe for a Cake](#simple-analogy-recipe-for-a-cake)
   - [📝 Handle with Care](#handle-with-care)
@@ -31,12 +32,11 @@ Best of luck! 🙏 Happy coding! 🧑‍💻
   - [🧩 Simple Analogy: The Picnic Basket](#-simple-analogy-the-picnic-basket)
   - [🔥 Use Cases and Benefits](#use-cases-and-benefits)
 
+---
 
-<!-- ---
+Available In: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
 
-Available Translations: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
-
---- -->
+---
 
 ## 1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript
 
@@ -66,7 +66,7 @@ Available Translations: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
 
 - 💡 As we’ve established, reference types are always truthy because they refer to a memory location, not the value itself.
 
-### ✨ Simple Analogy
+### ✨ Simple Analogy: Folder-Paper
 
 Think of primitive types as individual pieces of paper with something written on them. If the paper is blank (a falsy value), it’s like having nothing or false. Reference types, on the other hand, are like folders (objects) that can hold these papers. Even if the folder is designed to hold a blank paper, the folder itself still exists and is something (truthy). The function constructors like `new Number()` and `new Boolean()` are like special folders that come with a label and even if the label says `0` or `false` (falsy), the folder is still an item you can reference and use (truthy).
 
@@ -78,23 +78,23 @@ Think of primitive types as individual pieces of paper with something written on
 <details><summary><b>Click to expand details</b></summary>
 <p>
 
-In JavaScript, a ’prototype’ is like a blueprint for creating objects. It’s an object itself, and every function in JavaScript has a prototype property that’s used when creating new objects. This prototype object includes properties and methods that should be available to the objects created from the function.
+In JavaScript, a `prototype` is like a blueprint for creating objects. It’s an object itself, and every function in JavaScript has a prototype property that’s used when creating new objects. This prototype object includes properties and methods that should be available to the objects created from the function.
 
 ### 💡Simple Analogy: Recipe for a Cake
 
-Imagine you have a recipe for a cake. This recipe includes all the steps and ingredients you need to make the cake. In JavaScript, the recipe is like the ’prototype’. When you bake a cake using this recipe, the cake (an ‘object’) inherits all the properties from the recipe (the ‘prototype’). If you decide to add a new step to the recipe, like adding icing, all the cakes made from that recipe will now have icing too.
+Imagine you have a recipe for a cake. This recipe includes all the steps and ingredients you need to make the cake. In JavaScript, the recipe is like the `prototype`. When you bake a cake using this recipe, the cake (an `object`) inherits all the properties from the recipe (the `prototype`). If you decide to add a new step to the recipe, like adding icing, all the cakes made from that recipe will now have icing too.
 
 > ℹ️ Similarly, when you create an object from a constructor function in JavaScript, the object inherits all the properties and methods from the constructor’s prototype. This allows all objects created from the same constructor to share the same properties and methods, which can save memory and allow for a consistent structure.
 >
 >ℹ️ So, prototypal inheritance is a way objects in JavaScript can inherit properties and methods from a prototype, much like how multiple cakes can be made from the same recipe. But if a properties/methods is removed from the prototype, all objects that inherit from that prototype lose access to that properties/methods.
 
 ### 📝 Handle with Care
-While it’s tempting to keep adding to prototypes, it’s generally not recommended because it can lead to unexpected behavior in code, especially if libraries or frameworks are used that might also modify the prototype. Remember that with great power comes great responsibility.
+While it’s tempting to keep adding to prototypes, it’s generally not recommended because it can lead to unexpected behavior in code, especially if libraries or frameworks are used that might also modify the prototype. Remember that with great power comes great responsibility. 🙂
 
 ### 🎓 The Takeaway
-Prototypal inheritance is a powerful feature in JavaScript that allows objects to share and extend behaviors efficiently. It’s what makes JavaScript dynamic and flexible, enabling us to write more reusable and maintainable code.
+Prototypal inheritance is a powerful feature in JavaScript that allows objects to share and extend behaviors efficiently. It’s what makes JavaScript dynamic and flexible, enabling us to write more reusable and maintainable code. 💪
 
-✨ So, the next time you’re working with JavaScript objects, remember the family tree of prototypes and how it empowers your code with shared DNA.
+✨ So, the next time you’re working with JavaScript objects, remember the family tree of prototypes and how it empowers your code with shared DNA. 🧬
 
 __🧠 Now that we have basic understanding, lets go through the following examples.__
 
@@ -168,7 +168,7 @@ console.log(person.keysCount()); // Outputs: 2
 <details><summary><b>Click to expand details</b></summary>
 <p>
 
-A promise is a special JavaScript object that connects the “producing code” (which performs an asynchronous operation) with the “consuming code” (which handles the result of that operation). Think of it as a subscription list: the promise ensures that the result will be available to all subscribed code when it’s ready.
+A promise is a special JavaScript object that connects the “_producing code_” (which performs an asynchronous operation) with the “_consuming code_” (which handles the result of that operation). Think of it as a subscription list: the promise ensures that the result will be available to all subscribed code when it’s ready.
 
 ### ✨ Simple Analogy: Restaurant Reservation
 
@@ -190,11 +190,11 @@ Imagine you’re making a reservation at a restaurant for your niece’s birthda
 
 2. **Creating a Promise in JavaScript:**
 
-    - 👉 You can create a promise using the ”Promise” constructor. It takes a callback function with two parameters: ”resolve” and ”reject”
+    - 👉 You can create a promise using the ”Promise” constructor. It takes a callback function with two parameters: `resolve` and `reject`
 
     - 👉 Inside the callback, you perform your asynchronous operation (e.g., fetching data, loading an image, etc.).
 
-    - 👉 If everything goes well, you call ”resolve” with the result. If there’s an error, you call ”reject” with an error message.
+    - 👉 If everything goes well, you call `resolve` with the result. If there’s an error, you call `reject` with an error message.
 
 🧠 Remember, promises allow you to handle asynchronous operations more elegantly, making your code cleaner and easier to reason about. Just like a restaurant reservation, they ensure that the result will be available when needed! 🍽️
 
@@ -232,9 +232,9 @@ reservationPromise
 
 **Explanation:** 
 
-- We create a promise that resolves/reject based on the condition after a 2-second delay.
-- If `condition` is `true`, it logs “Promise worked! Stuff worked!” to the console.
-- If `condition` is `false`,  it logs “Something went wrong! Promise is rejected.” (you can customize the error message).
+- We create a promise `reservationPromise` that `resolves`/`reject` based on the condition after a 2-second delay.
+- If `condition` is `true`, it logs `Promise worked! Stuff worked!` to the console.
+- If `condition` is `false`,  it logs `Something went wrong! Promise is rejected`. (you can customize the error message).
 
 ---
 
@@ -287,7 +287,7 @@ try {
 
 <p>
 
-A closure is a fundamental concept in JavaScript. It occurs when a function “remembers” its lexical scope even after it has finished executing. In simpler terms, a closure allows a function to retain access to variables from its outer (enclosing) function, even when that outer function has completed execution.
+A closure is a fundamental concept in JavaScript. It occurs when a function _remembers_ its lexical scope even after it has finished executing. In simpler terms, a closure allows a function to retain access to variables from its _outer (enclosing) function_, even when that outer function has completed execution.
 
 ### 🧩 Simple Analogy: The Picnic Basket
 
@@ -296,14 +296,14 @@ Imagine you’re going on a picnic with friends. You pack a picnic basket with a
 **❇️ The Basket (Closure):**
 
 - ✨ The picnic basket encapsulates everything you need for the picnic.
-- ✨ It “closes over” its contents, keeping them private and secure.
+- ✨ It __closes over__ its contents, keeping them private and secure.
 - ✨  Similarly, a closure in JavaScript encapsulates variables and functions within a specific context.
 
 **🔥 How Do Closures Work?**
 
 1. **ℹ️ Lexical Scope:**
     - ✨ JavaScript uses lexical scoping, which means that functions have access to variables defined in their containing (parent) functions.
-    - ✨ When a function is defined, it “captures” its surrounding scope, creating a closure.
+    - ✨ When a function is defined, it _captures_ its surrounding scope, creating a closure.
 2. **ℹ️ Creating a Closure:** A closure is formed when:
     - ✨ An inner function is defined within an outer function.
     - ✨ The inner function references variables from the outer function.
@@ -319,9 +319,9 @@ Imagine you’re going on a picnic with friends. You pack a picnic basket with a
     - ✨ You can generate specialized functions (function factories) using closures. For instance, consider a function that generates related functions based on an initial value.
 - **ℹ️ Event Handling:**
     - ✨ When you attach an event handler (like a click event) to an HTML element, you’re creating a closure.
-    - ✨ The event handler function “remembers” the surrounding context (variables, functions) - even after it’s detached from the element.
+    - ✨ The event handler function _remembers_ the surrounding context (variables, functions) - even after it’s detached from the element.
 - **ℹ️ Timeouts and Intervals:**
-    - ✨ Closures are essential for managing timeouts and intervals, ’setTimeout’ or ’setInterval’.
+    - ✨ Closures are essential for managing timeouts and intervals, `setTimeout` or `setInterval`.
     - ✨ They ensure that the correct context is maintained when the callback executes.
 
 **🕹️ Now that we have the understanding, lets go through the following examples.**
@@ -346,7 +346,7 @@ console.log(counter()); // 2
 **Explanation:** 
 
 - The `createCounter` function encapsulates a `count` variable. It returns an anonymous function that, when called, increments `count` and returns its value.
-- The `count` variable is private and cannot be accessed or modified directly outside of `createCounter`.**
+- The `count` variable is private and cannot be accessed or modified directly outside of `createCounter`.
 
 ---
 
