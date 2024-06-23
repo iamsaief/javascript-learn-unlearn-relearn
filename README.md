@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽. <br/>
+Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽.
 I've created this for free-time fun, Please forgive the mistakes. If you find it helpful, I would really appreciate a ⭐️ or a reference to this repo. <br/> 
 Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
 </p>
