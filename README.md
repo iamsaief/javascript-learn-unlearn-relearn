@@ -16,7 +16,7 @@ Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
 
 ---
 
-- [1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript](#1--understanding-truthy-and-falsy-in-javascript)
+- [1. 🧐 Understanding _Truthy_ and _Falsy_ in JavaScript](#1--understanding-truthy-and-falsy-in-javascript)
   - [✅ Primitive Types](#primitive-types)
   - [✅ Reference Types](#reference-types)
   - [🤔 Why are Function Constructors Truthy?](#why-are-function-constructors-truthy)
@@ -31,6 +31,13 @@ Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
 - [4. 🗃️ What Are Closures in JavaScript?](#4-️what-are-closures-in-javascript)
   - [🧩 Simple Analogy: The Picnic Basket](#-simple-analogy-the-picnic-basket)
   - [🔥 Use Cases and Benefits](#use-cases-and-benefits)
+- [5. 🔄 Understanding event loop and asynchronous behavior in JavaScript](#5-understanding-event-loop-and-asynchronous-behavior-in-javascript)
+  - [1️⃣ Main Thread](#1️⃣-main-thread)
+  - [2️⃣ Asynchronous Tasks](#2️⃣-asynchronous-tasks)
+  - [3️⃣ Callback Queue](#3️⃣-callback-queue)
+  - [4️⃣ Event Loop](#4️⃣-event-loop)
+  - [⏱️ Web APIs and `setTimeout` Execution:](#️-web-apis-and-settimeout-execution)
+  - [🤝 Microtask Queue and `Promises` Execution:](#-microtask-queue-and-promises-execution)
 
 ---
 
@@ -38,7 +45,7 @@ Available In: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
 
 ---
 
-## 1. 🧐 Understanding *Truthy* and *Falsy* in JavaScript
+## 1. 🧐 Understanding _Truthy_ and _Falsy_ in JavaScript
 
 <details><summary><b>Click to expand details</b></summary>
 
@@ -75,6 +82,7 @@ Think of primitive types as individual pieces of paper with something written on
 </details>
 
 ## 2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript
+
 <details><summary><b>Click to expand details</b></summary>
 <p>
 
@@ -86,17 +94,21 @@ Imagine you have a recipe for a cake. This recipe includes all the steps and ing
 
 > ℹ️ Similarly, when you create an object from a constructor function in JavaScript, the object inherits all the properties and methods from the constructor’s prototype. This allows all objects created from the same constructor to share the same properties and methods, which can save memory and allow for a consistent structure.
 >
->ℹ️ So, prototypal inheritance is a way objects in JavaScript can inherit properties and methods from a prototype, much like how multiple cakes can be made from the same recipe. But if a properties/methods is removed from the prototype, all objects that inherit from that prototype lose access to that properties/methods.
+> ℹ️ So, prototypal inheritance is a way objects in JavaScript can inherit properties and methods from a prototype, much like how multiple cakes can be made from the same recipe. But if a properties/methods is removed from the prototype, all objects that inherit from that prototype lose access to that properties/methods.
 
 ### 📝 Handle with Care
+
 While it’s tempting to keep adding to prototypes, it’s generally not recommended because it can lead to unexpected behavior in code, especially if libraries or frameworks are used that might also modify the prototype. Remember that with great power comes great responsibility. 🙂
 
 ### 🎓 The Takeaway
+
 Prototypal inheritance is a powerful feature in JavaScript that allows objects to share and extend behaviors efficiently. It’s what makes JavaScript dynamic and flexible, enabling us to write more reusable and maintainable code. 💪
 
 ✨ So, the next time you’re working with JavaScript objects, remember the family tree of prototypes and how it empowers your code with shared DNA. 🧬
 
-__🧠 Now that we have basic understanding, lets go through the following examples.__
+**🧠 Now that we have basic understanding, lets go through the following examples.**
+
+---
 
 **Example: Barking Dog**
 
@@ -111,7 +123,7 @@ Dog.prototype.bark = function () {
   console.log(`Woof I am ${this.name}`);
 };
 
-const pet = new Dog('Mara');
+const pet = new Dog("Mara");
 
 pet.bark(); // Outputs: Woof I am Mara
 ```
@@ -122,11 +134,11 @@ pet.bark(); // Outputs: Woof I am Mara
 
 ```jsx
 // Adding a method to String.prototype
-String.prototype.shout = function() {
-  return this.toUpperCase() + '!!!';
+String.prototype.shout = function () {
+  return this.toUpperCase() + "!!!";
 };
 
-let greeting = 'hello';
+let greeting = "hello";
 console.log(greeting.shout()); // Outputs: HELLO!!!
 ```
 
@@ -136,7 +148,7 @@ console.log(greeting.shout()); // Outputs: HELLO!!!
 
 ```jsx
 // Adding a method to Array.prototype
-Array.prototype.firstElement = function() {
+Array.prototype.firstElement = function () {
   return this.length > 0 ? this[0] : undefined;
 };
 
@@ -150,11 +162,11 @@ console.log(numbers.firstElement()); // Outputs: 1
 
 ```jsx
 // Adding a method to Object.prototype
-Object.prototype.keysCount = function() {
+Object.prototype.keysCount = function () {
   return Object.keys(this).length;
 };
 
-let person = { name: 'Alice', age: 25 };
+let person = { name: "Alice", age: 25 };
 console.log(person.keysCount()); // Outputs: 2
 ```
 
@@ -182,23 +194,25 @@ Imagine you’re making a reservation at a restaurant for your niece’s birthda
 
 1. **States of a Promise:**
 
-    - **👉 Pending:** The promise is awaiting a response (like waiting for the table to be set).
+   - **👉 Pending:** The promise is awaiting a response (like waiting for the table to be set).
 
-    - **👉 Resolved (Fulfilled):** The promise has successfully returned a value (like when the table is ready).
+   - **👉 Resolved (Fulfilled):** The promise has successfully returned a value (like when the table is ready).
 
-    - **👉 Rejected:** The promise encountered an error (like when the restaurant couldn’t accommodate your reservation).
+   - **👉 Rejected:** The promise encountered an error (like when the restaurant couldn’t accommodate your reservation).
 
 2. **Creating a Promise in JavaScript:**
 
-    - 👉 You can create a promise using the ”Promise” constructor. It takes a callback function with two parameters: `resolve` and `reject`
+   - 👉 You can create a promise using the ”Promise” constructor. It takes a callback function with two parameters: `resolve` and `reject`
 
-    - 👉 Inside the callback, you perform your asynchronous operation (e.g., fetching data, loading an image, etc.).
+   - 👉 Inside the callback, you perform your asynchronous operation (e.g., fetching data, loading an image, etc.).
 
-    - 👉 If everything goes well, you call `resolve` with the result. If there’s an error, you call `reject` with an error message.
+   - 👉 If everything goes well, you call `resolve` with the result. If there’s an error, you call `reject` with an error message.
 
 🧠 Remember, promises allow you to handle asynchronous operations more elegantly, making your code cleaner and easier to reason about. Just like a restaurant reservation, they ensure that the result will be available when needed! 🍽️
 
 **🕹️ Now that we have basic understanding, lets go through the following examples.**
+
+---
 
 **Example: creating and using a promise**
 
@@ -209,28 +223,28 @@ const reservationPromise = new Promise((resolve, reject) => {
   const condition = true;
 
   if (condition) {
-	  setTimeout(() => {
-	    const data = 'Stuff worked!';
-	    resolve(data); // Resolve the promise;
-	  }, 2000); // Simulating a delay
+    setTimeout(() => {
+      const data = "Stuff worked!";
+      resolve(data); // Resolve the promise;
+    }, 2000); // Simulating a delay
   } else {
-	  setTimeout(() => {
-	      reject(Error('Promise is rejected.')); // Reject the promise;
-	   }, 2000); // Simulating a delay
+    setTimeout(() => {
+      reject(Error("Promise is rejected.")); // Reject the promise;
+    }, 2000); // Simulating a delay
   }
 });
 
 // Consuming the promise
 reservationPromise
-  .then(result => {
-    console.log('Promise worked!', result); // Handle success
+  .then((result) => {
+    console.log("Promise worked!", result); // Handle success
   })
-  .catch(err => {
-    console.log('Something went wrong!', err.message); // Handle error
+  .catch((err) => {
+    console.log("Something went wrong!", err.message); // Handle error
   });
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - We create a promise `reservationPromise` that `resolves`/`reject` based on the condition after a 2-second delay.
 - If `condition` is `true`, it logs `Promise worked! Stuff worked!` to the console.
@@ -238,12 +252,12 @@ reservationPromise
 
 ---
 
-**Example: using __async/await__ with __Fetch API__**
+**Example: using **async/await** with **Fetch API\*\*\*\*
 
 ```jsx
 async function getData() {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     if (response.status === 200) {
       const data = await response.json(); // Await the JSON parsing
       return data;
@@ -251,7 +265,7 @@ async function getData() {
       throw new Error(`Error fetching data. Status: ${response.status}`);
     }
   } catch (error) {
-    console.error('An error occurred:', error.message);
+    console.error("An error occurred:", error.message);
     // Handle the error gracefully (e.g., show a user-friendly message)
     return null;
   }
@@ -261,16 +275,16 @@ async function getData() {
 try {
   const result = await getData();
   if (result && result.length > 0) {
-    console.log('Data received:', result);
+    console.log("Data received:", result);
   } else {
-    console.log('Failed to fetch data.');
+    console.log("Failed to fetch data.");
   }
 } catch (error) {
-  console.error('An error occurred during data retrieval:', error.message);
+  console.error("An error occurred during data retrieval:", error.message);
 }
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - The `getData` function is defined as an **async function**. This means it always returns a **promise**.
 - We use `await` directly in the `getData()` function to wait for the `fetch` request to complete and handle the response.
@@ -296,42 +310,44 @@ Imagine you’re going on a picnic with friends. You pack a picnic basket with a
 **❇️ The Basket (Closure):**
 
 - ✨ The picnic basket encapsulates everything you need for the picnic.
-- ✨ It __closes over__ its contents, keeping them private and secure.
-- ✨  Similarly, a closure in JavaScript encapsulates variables and functions within a specific context.
+- ✨ It **closes over** its contents, keeping them private and secure.
+- ✨ Similarly, a closure in JavaScript encapsulates variables and functions within a specific context.
 
 **🔥 How Do Closures Work?**
 
 1. **ℹ️ Lexical Scope:**
-    - ✨ JavaScript uses lexical scoping, which means that functions have access to variables defined in their containing (parent) functions.
-    - ✨ When a function is defined, it _captures_ its surrounding scope, creating a closure.
+   - ✨ JavaScript uses lexical scoping, which means that functions have access to variables defined in their containing (parent) functions.
+   - ✨ When a function is defined, it _captures_ its surrounding scope, creating a closure.
 2. **ℹ️ Creating a Closure:** A closure is formed when:
-    - ✨ An inner function is defined within an outer function.
-    - ✨ The inner function references variables from the outer function.
-    - ✨ The inner function is returned or passed as an argument to other functions.
+   - ✨ An inner function is defined within an outer function.
+   - ✨ The inner function references variables from the outer function.
+   - ✨ The inner function is returned or passed as an argument to other functions.
 
 ### 🔥 Use Cases and Benefits
 
 - **ℹ️ Data Privacy:**
-    - ✨ By enclosing variables within a closure, you create private variables.
-    - ✨ These variables are accessible only within the closure’s scope, providing data privacy.
-    - ✨ This approach emulates private methods in object-oriented programming.
+  - ✨ By enclosing variables within a closure, you create private variables.
+  - ✨ These variables are accessible only within the closure’s scope, providing data privacy.
+  - ✨ This approach emulates private methods in object-oriented programming.
 - **ℹ️ Function Factories:**
-    - ✨ You can generate specialized functions (function factories) using closures. For instance, consider a function that generates related functions based on an initial value.
+  - ✨ You can generate specialized functions (function factories) using closures. For instance, consider a function that generates related functions based on an initial value.
 - **ℹ️ Event Handling:**
-    - ✨ When you attach an event handler (like a click event) to an HTML element, you’re creating a closure.
-    - ✨ The event handler function _remembers_ the surrounding context (variables, functions) - even after it’s detached from the element.
+  - ✨ When you attach an event handler (like a click event) to an HTML element, you’re creating a closure.
+  - ✨ The event handler function _remembers_ the surrounding context (variables, functions) - even after it’s detached from the element.
 - **ℹ️ Timeouts and Intervals:**
-    - ✨ Closures are essential for managing timeouts and intervals, `setTimeout` or `setInterval`.
-    - ✨ They ensure that the correct context is maintained when the callback executes.
+  - ✨ Closures are essential for managing timeouts and intervals, `setTimeout` or `setInterval`.
+  - ✨ They ensure that the correct context is maintained when the callback executes.
 
 **🕹️ Now that we have the understanding, lets go through the following examples.**
+
+---
 
 **Example: Data Privacy**
 
 ```jsx
 function createCounter() {
   let count = 0;
-  return function() {
+  return function () {
     count += 1;
     return count;
   };
@@ -343,7 +359,7 @@ console.log(counter()); // 2
 // 'count' is not accessible from outside the 'createCounter' function.
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - The `createCounter` function encapsulates a `count` variable. It returns an anonymous function that, when called, increments `count` and returns its value.
 - The `count` variable is private and cannot be accessed or modified directly outside of `createCounter`.
@@ -354,7 +370,7 @@ console.log(counter()); // 2
 
 ```jsx
 function makeMultiplier(multiplier) {
-  return function(number) {
+  return function (number) {
     return number * multiplier;
   };
 }
@@ -363,7 +379,7 @@ const double = makeMultiplier(2);
 console.log(double(5)); // 10
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - The `makeMultiplier` function takes a `multiplier` argument and returns a new function. This returned function takes a `number` argument and returns the product of `number` and `multiplier`.
 - Each function created by `makeMultiplier` retains its own `multiplier` value.
@@ -373,15 +389,15 @@ console.log(double(5)); // 10
 **Example: Event Handling**
 
 ```jsx
-let countClicks = (function() {
+let countClicks = (function () {
   let count = 0;
-  return function() {
+  return function () {
     count += 1;
     console.log(`Button clicked ${count} times`);
   };
 })();
 
-document.getElementById('myButton').addEventListener('click', countClicks);
+document.getElementById("myButton").addEventListener("click", countClicks);
 ```
 
 **Explanation:**
@@ -395,18 +411,192 @@ document.getElementById('myButton').addEventListener('click', countClicks);
 
 ```jsx
 function delayedAlert(message, delay) {
-  setTimeout(function() {
+  setTimeout(function () {
     alert(message);
   }, delay);
 }
 
-delayedAlert('Hello after 2 seconds', 2000);
+delayedAlert("Hello after 2 seconds", 2000);
 ```
 
-**Explanation:** 
+**Explanation:**
 
 - The `delayedAlert` function demonstrates a closure where the `message` and `delay` parameters are used by the anonymous function inside the `setTimeout`.
 - Even after `delayedAlert` has finished executing, the callback function can still access the `message` and `delay`.
+
+</p>
+</details>
+
+## 5. 🔄 Understanding event loop and asynchronous behavior in JavaScript
+
+<details><summary><b>Click to expand details</b></summary>
+
+<p>
+
+JavaScript is single-threaded, which means it processes one task at a time. However, it can handle asynchronous tasks efficiently using an event loop. Here’s how it works:
+
+### 1️⃣ Main Thread
+
+- When you run JavaScript code, it executes on the main thread.
+- Any synchronous code (like function calls, assignments, or loops) runs sequentially.
+
+### 2️⃣ Asynchronous Tasks
+
+- Asynchronous operations (e.g., fetching data from an API, reading files, or waiting for user input) don’t block the main thread.
+- These tasks are delegated to the browser’s `Web API`s (like setTimeout, fetch, or addEventListener).
+- While waiting for the result, the main thread continues executing other code.
+
+### 3️⃣ Callback Queue
+
+- When an asynchronous task completes, it places its callback (a function to execute) in the callback queue.
+- The callback queue holds functions waiting to be executed.
+
+### 4️⃣ Event Loop
+
+The event loop continuously checks:
+
+- Is the call stack (where functions execute) empty?
+- Is there anything in the callback queue?
+- If the call stack is empty, the event loop picks the next callback from the queue and pushes it onto the call stack for execution.
+
+### ⏱️ Web APIs and `setTimeout` Execution:
+
+**1️⃣ `setTimeout` Execution**
+
+- JavaScript can access Web APIs (e.g., `setTimeout`, `fetch`, `addEventListener`). These are asynchronous and run in parallel with other operations.
+- When you call setTimeout(callback, delay), it schedules the callback function to run after the specified delay.
+- The browser delegates this task to a Web API (outside the JavaScript engine).
+- The main thread continues executing other code while waiting for the delay.
+- After the delay, the callback is placed in the callback queue.
+
+**2️⃣ Event Loop**
+
+The event loop continuously checks:
+
+- Is the call stack (where functions execute) empty?
+- Is there anything in the callback queue?
+- If the call stack is empty, the event loop picks the next callback from the queue and pushes it onto the call stack for execution.
+
+### 🤝 Microtask Queue and `Promises` Execution:
+
+Promises handle asynchronous operations more elegantly:
+
+**1️⃣ `Promise` Execution:**
+
+- A promise represents a value that may not be available yet (e.g., data from an API).
+- When a promise resolves (or rejects), it schedules its callback (.then() or .catch()) to run.
+- Promises use the `microtask queue` (higher priority than the callback queue).
+
+**2️⃣ Event Loop and Microtasks:**
+
+- After executing the current task (e.g., a synchronous function), the event loop checks the microtask queue.
+- If there are resolved promises waiting, their callbacks are executed.
+- This ensures that promises are handled before the next task from the callback queue.
+
+📝 In summary, `setTimeout` uses the `callback queue`, while promises use the `microtask queue`. The event loop manages both, ensuring efficient handling of asynchronous tasks! 🔁
+Remember, the event loop ensures that asynchronous tasks don’t block the main thread, allowing your application to remain responsive even during time-consuming operations! 💪
+
+**🕹️ Now that we have the understanding, lets go through the following examples.**
+
+---
+
+**Example: `setTimeout`**
+
+```jsx
+console.log("Start");
+setTimeout(() => {
+  console.log("Timeout callback");
+}, 1000);
+console.log("End");
+
+// Output:
+/* 
+'Start'
+'End'
+(After 1 second) 'Timeout callback' 
+*/
+```
+
+**Explanation:**
+
+- `Start` and `End` execute synchronously.
+- The `setTimeout` callback is scheduled to run after 1 second, but it doesn’t block the main thread.
+
+1. Initial Execution:
+
+   - The `console.log('Start')` statement runs first, printing `Start`.
+   - Next, the `setTimeout` function is called, which schedules the callback function to run after 1000 milliseconds (1 second).
+   - Finally, the `console.log('End')` statement executes, printing `End`.
+
+2. Event Loop and Web APIs:
+
+   - The `setTimeout` callback is asynchronous and gets delegated to the Web APIs.
+   - The main thread is free to continue executing other code.
+
+3. Timeout Completion:
+
+   - After 1 second, the Web APIs signal that the timeout has completed.
+   - The callback (`console.log('Timeout callback')`) is placed in the callback queue.
+
+4. Callback Queue and Event Loop:
+
+   - The event loop checks if the call stack is empty.
+   - Since it is, the callback is moved from the queue to the call stack.
+   - The callback executes, printing `Timeout callback`.
+
+5. Final Output Order:
+   - `Start`
+   - `End`
+   - (After 1 second) `Timeout callback`
+
+---
+
+**Example: `Promise`**
+
+```jsx
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Data fetched"), 1000);
+  });
+};
+
+fetchData().then((result) => {
+  console.log(result);
+});
+console.log("Fetching data...");
+
+// Output:
+/* 
+'Fetching data...'
+(After 1 second) 'Data fetched'
+*/
+```
+
+**Explanation:**
+
+- `fetchData` returns a promise that resolves after 1 second.
+- The `.then()` callback waits for the promise to resolve.
+- Meanwhile, the main thread continues executing `Fetching data...`.
+
+1. Initial Execution:
+
+   - The `fetchData` function returns a promise.
+   - The console.log(`Fetching data...`) statement runs, printing `Fetching data...`.
+
+2. Promise Execution:
+
+   - The promise resolves after 1 second (due to the `setTimeout`).
+   - The resolved value (`Data fetched`) is placed in the callback queue.
+
+3. Callback Queue and Event Loop:
+
+   - The event loop checks if the call stack is empty.
+   - It moves the `.then()` callback to the call stack.
+   - The callback executes, printing `Data fetched`.
+
+4. Final Output Order:
+   - `Fetching data...`
+   - (After 1 second) `Data fetched`
 
 </p>
 </details>
