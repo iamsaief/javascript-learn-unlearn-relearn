@@ -36,8 +36,8 @@ Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
   - [2️⃣ Asynchronous Tasks](#2️⃣-asynchronous-tasks)
   - [3️⃣ Callback Queue](#3️⃣-callback-queue)
   - [4️⃣ Event Loop](#4️⃣-event-loop)
-  - [⏱️ Web APIs and `setTimeout` Execution:](#️-web-apis-and-settimeout-execution)
-  - [🤝 Microtask Queue and `Promises` Execution:](#-microtask-queue-and-promises-execution)
+  - [⏱️ Web APIs and `setTimeout` Execution](#️-web-apis-and-settimeout-execution)
+  - [🤝 Microtask Queue and `Promises` Execution](#-microtask-queue-and-promises-execution)
 
 ---
 
@@ -459,7 +459,7 @@ The event loop continuously checks:
 - Is there anything in the callback queue?
 - If the call stack is empty, the event loop picks the next callback from the queue and pushes it onto the call stack for execution.
 
-### ⏱️ Web APIs and `setTimeout` Execution:
+### ⏱️ Web APIs and `setTimeout` Execution
 
 **1️⃣ `setTimeout` Execution**
 
@@ -477,7 +477,7 @@ The event loop continuously checks:
 - Is there anything in the callback queue?
 - If the call stack is empty, the event loop picks the next callback from the queue and pushes it onto the call stack for execution.
 
-### 🤝 Microtask Queue and `Promises` Execution:
+### 🤝 Microtask Queue and `Promises` Execution
 
 Promises handle asynchronous operations more elegantly:
 
@@ -581,7 +581,7 @@ console.log("Fetching data...");
 1. Initial Execution:
 
    - The `fetchData` function returns a promise.
-   - The console.log(`Fetching data...`) statement runs, printing `Fetching data...`.
+   - The `console.log("Fetching data...")` statement runs, printing `Fetching data...`.
 
 2. Promise Execution:
 
