@@ -1,13 +1,12 @@
 <div align="center">
   <img height="60" src="https://img.icons8.com/color/344/javascript.png">
-  <h1>Learn-Unlearn-Relearn JavaScript 🔄</h1>
+  <h1>JavaScript: Learn Unlearn & Relearn 🔄</h1>
 </div>
 
-<p align="center">
-Test how well you know JavaScript, refresh your knowledge or prepare yourself for an interview! 💪 Feel free to study as you wish! 🎓 The details are in the collapsed sections, simply click to expand 🔽.
-I've created this for free-time fun, Please forgive the mistakes. If you find it helpful, I would really appreciate a ⭐️ or a reference to this repo. <br/> 
-Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
-</p>
+Test your **JavaScript knowledge**, refresh important concepts, or **prepare for an interview** with this **comprehensive guide**! 💪 Whether you're a **beginner or intermediate** learner, this document will help you **strengthen your understanding** with **detailed explanations, multiple examples, common mistakes, and real-world applications.**
+
+I created this for **fun and learning in free time**, so please **forgive any mistakes**! If you find it helpful, I’d truly **appreciate a ⭐️ or a reference to this repo**. <br>
+Best of luck on your **programming journey**—🙏✨ **Happy coding!** 🧑‍💻
 
 <p align="center">
 💬 In case you want to reach out or just say hi, ↩️ <br/>
@@ -38,6 +37,26 @@ Best of luck for your programming journey! 🙏 Happy coding! 🧑‍💻
   - [4️⃣ Event Loop](#4️⃣-event-loop)
   - [⏱️ Web APIs and `setTimeout` Execution](#️-web-apis-and-settimeout-execution)
   - [🤝 Microtask Queue and `Promises` Execution](#-microtask-queue-and-promises-execution)
+- [6. 🔥 Why `this` in JavaScript Can Be Confusing (And How to Master It)](#6--why-this-in-javascript-can-be-confusing-and-how-to-master-it)
+  - [💡 Simple Analogy: A Personal Assistant with Multiple Bosses](#-simple-analogy-a-personal-assistant-with-multiple-bosses)
+  - [🔍 Understanding `this` in Different Contexts](#-understanding-this-in-different-contexts)
+  - [📌 Where You’ll See This in the Real World](#-where-youll-see-this-in-the-real-world)
+- [7. 💡 `call`, `apply`, and `bind`: The Superpowers of JavaScript Functions](#7--call-apply-and-bind-the-superpowers-of-javascript-functions)
+  - [💡 Simple Analogy: Borrowing Someone's Car](#-simple-analogy-borrowing-someones-car)
+  - [🔍 Understanding How These Methods Work](#-understanding-how-these-methods-work)
+  - [📌 Where You’ll See This in the Real World](#-where-youll-see-this-in-the-real-world-1)
+- [8. 🚀 `map`, `filter`, and `reduce` Explained Like You’re Five](#8--map-filter-and-reduce-explained-like-youre-five)
+  - [💡 Simple Analogy: Sorting Clothes](#-simple-analogy-sorting-clothes)
+  - [🔍 Understanding Each Method](#-understanding-each-method)
+  - [📌 Where You’ll See This in the Real World](#-where-youll-see-this-in-the-real-world-2)
+- [9. ⏳ How `setTimeout` and `setInterval` Work in JavaScript (And Why They Matter)](#9--how-settimeout-and-setinterval-work-in-javascript-and-why-they-matter)
+  - [💡 Simple Analogy: Alarm Clock vs. Recurring Notifications](#-simple-analogy-alarm-clock-vs-recurring-notifications)
+  - [🔍 Understanding How Each Works](#-understanding-how-each-works)
+  - [📌 Where You’ll See This in the Real World](#-where-youll-see-this-in-the-real-world-3)
+- [10. 🔄 `async` and `await`: The Easiest Way to Handle Promises](#10--async-and-await-the-easiest-way-to-handle-promises)
+  - [💡 Simple Analogy: Ordering Food Online](#-simple-analogy-ordering-food-online)
+  - [🔍 Understanding Asynchronous Behavior](#-understanding-asynchronous-behavior)
+  - [📌 Where You’ll See This in the Real World](#-where-youll-see-this-in-the-real-world-4)
 
 ---
 
@@ -46,8 +65,6 @@ Available In: [🇧🇩 বাংলা](./bn-BD/README_bn-BD.md)
 ---
 
 ## 1. 🧐 Understanding _Truthy_ and _Falsy_ in JavaScript
-
-<details><summary><b>Click to expand details</b></summary>
 
 ### ✅ Primitive Types
 
@@ -79,12 +96,7 @@ Think of primitive types as individual pieces of paper with something written on
 
 🧠 Remember, in JavaScript, the type of value determines its **truthiness** or **falsiness**. Objects will always be your go-to for a guaranteed truthy value!
 
-</details>
-
 ## 2. 👨‍👩‍👧‍👦 Understanding Prototypal Inheritance in JavaScript
-
-<details><summary><b>Click to expand details</b></summary>
-<p>
 
 In JavaScript, a `prototype` is like a blueprint for creating objects. It’s an object itself, and every function in JavaScript has a prototype property that’s used when creating new objects. This prototype object includes properties and methods that should be available to the objects created from the function.
 
@@ -172,13 +184,7 @@ console.log(person.keysCount()); // Outputs: 2
 
 **Explanation:** we add a method called `keysCount` to `Object.prototype`. This method returns the number of keys (properties) in an object. By adding this method to `Object.prototype`, every object created in JavaScript, including `person`, now has access to the `keysCount` method. When we call `person.keysCount()`, it outputs `2` because there are two keys in the `person` object: `name` and `age`.
 
-</p>
-</details>
-
 ## 3. 🤝 What Are Promises in JavaScript?
-
-<details><summary><b>Click to expand details</b></summary>
-<p>
 
 A promise is a special JavaScript object that connects the “_producing code_” (which performs an asynchronous operation) with the “_consuming code_” (which handles the result of that operation). Think of it as a subscription list: the promise ensures that the result will be available to all subscribed code when it’s ready.
 
@@ -252,7 +258,7 @@ reservationPromise
 
 ---
 
-**Example: using **async/await** with **Fetch API\*\*\*\*
+**Example: using `async`/`await` with Fetch API**
 
 ```jsx
 async function getData() {
@@ -292,14 +298,7 @@ try {
 - If there’s an error (e.g., non-200 status or network issues), we throw an error and catch it in the `try`/`catch` block.
 - The usage section demonstrates how to call the `getData()` function and handle the result or error.
 
-</p>
-</details>
-
 ## 4. 🗃️ What Are Closures in JavaScript?
-
-<details><summary><b>Click to expand details</b></summary>
-
-<p>
 
 A closure is a fundamental concept in JavaScript. It occurs when a function _remembers_ its lexical scope even after it has finished executing. In simpler terms, a closure allows a function to retain access to variables from its _outer (enclosing) function_, even when that outer function has completed execution.
 
@@ -424,14 +423,7 @@ delayedAlert("Hello after 2 seconds", 2000);
 - The `delayedAlert` function demonstrates a closure where the `message` and `delay` parameters are used by the anonymous function inside the `setTimeout`.
 - Even after `delayedAlert` has finished executing, the callback function can still access the `message` and `delay`.
 
-</p>
-</details>
-
 ## 5. 🔄 Understanding event loop and asynchronous behavior in JavaScript
-
-<details><summary><b>Click to expand details</b></summary>
-
-<p>
 
 JavaScript is single-threaded, which means it processes one task at a time. However, it can handle asynchronous tasks efficiently using an event loop. Here’s how it works:
 
@@ -598,5 +590,279 @@ console.log("Fetching data...");
    - `Fetching data...`
    - (After 1 second) `Data fetched`
 
-</p>
-</details>
+## 6. 🔥 Why `this` in JavaScript Can Be Confusing (And How to Master It)
+
+- ✅ Implicit vs. Explicit Binding <br>
+- ✅ Arrow Functions and Lexical `this` <br>
+- ✅ Common Pitfalls and Fixes <br>
+
+### 💡 Simple Analogy: A Personal Assistant with Multiple Bosses
+
+Imagine an assistant who works for different bosses depending on the situation. Sometimes, they know exactly who to report to, but in tricky cases, they might get confused. **Similarly `this` refers to different objects depending on how and where a function is called**.
+
+### 🔍 Understanding `this` in Different Contexts
+
+**📝 Example 1: Implicit Binding (How `this` Works Inside an Object Method)**
+
+```javascript
+const person = {
+  name: "Alice",
+  greet() {
+    console.log(`Hello, my name is ${this.name}`);
+  },
+};
+
+person.greet(); // Outputs: Hello, my name is Alice
+```
+
+**💡 Explanation:**
+
+Since `this` is inside the greet method, it correctly refers to the `person` object.
+
+**📝 Example 2: Explicit Binding with `call`, `apply`, and `bind`**
+
+```javascript
+function sayHello() {
+  console.log(`Hello, my name is ${this.name}`);
+}
+
+const user = { name: "John" };
+
+sayHello.call(user); // Outputs: Hello, my name is John
+```
+
+**💡 Explanation:**
+
+We explicitly define `this` using `.call()`, making sure it refers to `user`.
+
+**📌 Common Mistake:**
+
+Forgetting to bind this properly inside event listeners or callbacks can lead to errors!
+
+**📝 Example 3: Arrow Functions and Lexical `this`**
+
+```javascript
+const student = {
+  name: "Emma",
+  subjects: ["Math", "Science"],
+  showSubjects() {
+    this.subjects.forEach((subject) => console.log(`${this.name} studies ${subject}`));
+  },
+};
+
+student.showSubjects();
+// Outputs: Emma studies Math
+// Emma studies Science
+```
+
+**💡 Explanation:**
+
+Arrow functions **do not** have their own `this`, so they inherit it from their surrounding function (`showSubjects`).
+
+### 📌 Where You’ll See This in the Real World
+
+- Debugging why `this` is `undefined` inside callbacks
+- Ensuring correct `this` binding for class methods
+- Fixing unexpected behavior in event listeners
+
+## 7. 💡 `call`, `apply`, and `bind`: The Superpowers of JavaScript Functions
+
+- ✅ Borrowing Methods from Other Objects
+- ✅ Key Differences Between Them
+- ✅ Real-World Applications
+
+### 💡 Simple Analogy: Borrowing Someone's Car
+
+Imagine your friend owns a car, but you need to drive it.
+
+- `call` lets you drive it immediately.
+- `apply` works the same, but asks you to list passengers in an array (arguments).
+- `bind` hands you the keys, but you can drive whenever you want.
+
+### 🔍 Understanding How These Methods Work
+
+**📝 Example 1: Using `call` to Invoke a Function with a Custom Context**
+
+```javascript
+const person1 = { name: "Alice" };
+const person2 = { name: "Bob" };
+
+function introduce(age) {
+  console.log(`Hi, I'm ${this.name} and I'm ${age} years old.`);
+}
+
+introduce.call(person1, 25); // Outputs: Hi, I'm Alice and I'm 25 years old.
+introduce.call(person2, 30); // Outputs: Hi, I'm Bob and I'm 30 years old.
+```
+
+**💡 Explanation:** `.call()` lets us execute the function immediately while assigning `this` to `person1` or `person2`.
+
+**📝 Example 2: Using `apply` to Pass Arguments as an Array**
+
+```javascript
+introduce.apply(person1, [25]); // Outputs: Hi, I'm Alice and I'm 25 years old.
+introduce.apply(person2, [30]); // Outputs: Hi, I'm Bob and I'm 30 years old.
+```
+
+**💡 Explanation:** `.apply()` works the same as `.call()`, but requires arguments in an array.
+
+**📝 Example 3: Using `bind` to Return a New Function**
+
+```javascript
+const boundFunction = introduce.bind(person1, 28);
+boundFunction(); // Outputs: Hi, I'm Alice and I'm 28 years old.
+```
+
+**💡 Explanation:** `.bind()` doesn't execute immediately—it creates a new function that remembers `this`.
+
+### 📌 Where You’ll See This in the Real World
+
+- Borrowing array methods for objects
+- Setting event listeners while preserving `this`
+- Ensuring correct `this` binding inside asynchronous functions
+
+## 8. 🚀 `map`, `filter`, and `reduce` Explained Like You’re Five
+
+- ✅ Transforming Data in Arrays
+- ✅ When and How to Use Them
+- ✅ Multiple Real-Life Examples
+
+### 💡 Simple Analogy: Sorting Clothes
+
+Imagine you’re organizing a pile of clothes:
+
+- `map` irons all items neatly.
+- `filter` removes worn-out pieces.
+- `reduce` folds everything into a neat bundle.
+
+### 🔍 Understanding Each Method
+
+**📝 Example 1: Using `map` to Modify Items in an Array**
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map((n) => n * 2);
+console.log(doubled); // Outputs: [2, 4, 6, 8, 10]
+```
+
+**💡 Explanation:** Each item in the array is transformed without changing the original array.
+
+**📝 Example 2: Filtering Specific Values**
+
+```javascript
+const ages = [12, 20, 17, 25, 30];
+
+const adults = ages.filter((age) => age >= 18);
+console.log(adults); // Outputs: [20, 25, 30]
+```
+
+**💡 Explanation:** `filter` removes values that don’t match the condition.
+
+**📝 Example 3: Using `reduce` to Sum Up Values**
+
+```javascript
+const prices = [10, 20, 30, 40];
+
+const totalPrice = prices.reduce((total, price) => total + price, 0);
+console.log(totalPrice); // Outputs: 100
+```
+
+**💡 Explanation:** `reduce` starts at zero, then adds each item.
+
+### 📌 Where You’ll See This in the Real World
+
+- Modifying and transforming data in APIs
+- Filtering user lists based on conditions
+- Summing up totals in e-commerce applications
+
+## 9. ⏳ How `setTimeout` and `setInterval` Work in JavaScript (And Why They Matter)
+
+- ✅ Scheduling Tasks Like a Pro
+- ✅ Understanding Web APIs and Delayed Execution
+- ✅ Clearing Timers with `clearTimeout` and `clearInterval`
+
+### 💡 Simple Analogy: Alarm Clock vs. Recurring Notifications
+
+- `setTimeout` acts like an alarm—it rings once after a delay.
+- `setInterval` behaves like recurring notifications—it rings repeatedly at set intervals.
+
+### 🔍 Understanding How Each Works
+
+**📝 Example 1: Using `setTimeout` to Delay Execution**
+
+```javascript
+setTimeout(() => console.log("Hello after 2 seconds"), 2000);
+```
+
+**💡 Explanation:** The function inside `setTimeout` waits for 2 seconds before executing, allowing other code to continue running in the meantime.
+
+**📝 Example 2: Using `setInterval` to Run a Function Repeatedly**
+
+```javascript
+let counter = 0;
+
+const interval = setInterval(() => {
+  counter++;
+  console.log(`Count: ${counter}`);
+  if (counter === 5) clearInterval(interval); // Stop after 5 repetitions
+}, 1000);
+```
+
+**💡 Explanation:** `setInterval` runs every second until `counter` reaches 5, at which point we call `clearInterval()` to stop it.
+
+### 📌 Where You’ll See This in the Real World
+
+- **Countdown timers** (e.g., auction bidding, flash sales)
+- **Auto-refreshing notification**s (e.g., live sports scores)
+- **Delayed animations** (e.g., showing tooltips after hovering)
+
+## 10. 🔄 `async` and `await`: The Easiest Way to Handle Promises
+
+- ✅ Say Goodbye to Callback Hell
+- ✅ Writing Clean, Maintainable Asynchronous Code
+- ✅ Handling Errors in Async Functions
+
+### 💡 Simple Analogy: Ordering Food Online
+
+You place an order at a restaurant (**promise**) and wait (**await**) for your food before eating.
+
+### 🔍 Understanding Asynchronous Behavior
+
+**📝 Example 1: Basic async and await Usage**
+
+```javascript
+async function fetchData() {
+  let response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  let data = await response.json();
+  console.log(data);
+}
+
+fetchData();
+```
+
+**💡 Explanation:** `await` **pauses execution until the fetch request completes**, ensuring we don’t access `data` before it’s available.
+
+**📝 Example 2: Handling Errors in Async Code**
+
+```javascript
+async function fetchUserData() {
+  try {
+    let response = await fetch("https://invalid-url.com");
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log("Error fetching data:", error.message);
+  }
+}
+
+fetchUserData();
+```
+
+**💡 Explanation:** Wrapping code inside `try...catch` **prevents the entire script from breaking** if the request fails.
+
+### 📌 Where You’ll See This in the Real World
+
+- **Fetching data from APIs** (e.g., retrieving user profiles)
+- **Handling authentication flows** (e.g., logging in users)
+- **Waiting for animations to complete** (e.g., fading effects in UI)
