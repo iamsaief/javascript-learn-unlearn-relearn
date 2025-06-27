@@ -33,7 +33,7 @@ Best of luck on your **programming journey**—🙏✨ **Happy coding!** 🧑‍
 - [14. 🛡️ `try...catch` : The Secret to Handling Errors Like a Pro](#14-️-trycatch--the-secret-to-handling-errors-like-a-pro)
 - [15. 🔑 The Power of `Object.keys()`, `Object.values()`, and `Object.entries()`](#15--the-power-of-objectkeys-objectvalues-and-objectentries)
 - [16. ⏱️ _Debounce_ and _Throttle_ in JavaScript: Control When Your Functions Fire](#16-️-debounce-and-throttle-in-javascript-control-when-your-functions-fire)
-- [17. 🎯 Event Delegation in JavaScript: Handle More with Less](#17--event-delegation-in-javascript-handle-more-with-less)
+- [17. 🎯 Event _Delegation_ in JavaScript: Handle More with Less](#17--event-delegation-in-javascript-handle-more-with-less)
 - [18. 🎛️ Understanding Event Bubbling and Capturing in JavaScript](#18-️-understanding-event-bubbling-and-capturing-in-javascript)
 
 ---
@@ -1110,7 +1110,7 @@ document.addEventListener("scroll", optimizedScroll);
 
 <br>
 
-## 17. 🎯 Event Delegation in JavaScript: Handle More with Less
+## 17. 🎯 Event _Delegation_ in JavaScript: Handle More with Less
 
 - **✅ Reduce Event Listeners**
 - **✅ Simplify DOM Management**
