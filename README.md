@@ -35,6 +35,8 @@ Best of luck on your **programming journey**—🙏✨ **Happy coding!** 🧑‍
 - [16. ⏱️ _Debounce_ and _Throttle_ in JavaScript: Control When Your Functions Fire](#16-️-debounce-and-throttle-in-javascript-control-when-your-functions-fire)
 - [17. 🎯 Event _Delegation_ in JavaScript: Handle More with Less](#17--event-delegation-in-javascript-handle-more-with-less)
 - [18. 🎛️ Understanding Event Bubbling and Capturing in JavaScript](#18-️-understanding-event-bubbling-and-capturing-in-javascript)
+- [19. 🧠 Memory Management in JavaScript: How to Prevent Leaks and Optimize Your App](#19--memory-management-in-javascript-how-to-prevent-leaks-and-optimize-your-app)
+- [20.](#20)
 
 ---
 
@@ -1321,3 +1323,106 @@ document.getElementById("child").addEventListener("click", (e) => {
 | Capturing | Top → Target | Listeners with `{ capture: true }`  |
 | Target    | —            | The element that received the event |
 | Bubbling  | Target → Top | Default phase for most listeners    |
+
+<br>
+
+## 19. 🧠 Memory Management in JavaScript: How to Prevent Leaks and Optimize Your App
+
+- **✅ Understand the Garbage Collector**
+- **✅ Avoid Hidden Memory Leaks**
+- **✅ Keep Your Apps Fast and Lean**
+
+### 🧠 Simple Analogy: Memory as a Workspace
+
+Imagine your app is working at a desk. It opens files (objects), stacks papers (variables), and loads folders (DOM elements). But if it **never clears them off**, the desk gets cluttered - and the app slows down.
+
+JavaScript’s memory model automatically removes unused items (like tossing trash), but you still need to know **what clutters the desk** and how to keep it tidy.
+
+### 🧪 Example 1: The JavaScript Memory Lifecycle
+
+```javascript
+function createUser() {
+  const user = {
+    name: "Saief",
+    skills: ["React", "TypeScript"],
+  };
+  return user;
+}
+
+const newUser = createUser();
+```
+
+**💡 Explanation:**
+
+- `user` is stored in memory when the function runs.
+- When it’s returned and assigned to `newUser`, it remains reachable.
+- Once there are **no more references**, the **garbage collector** will reclaim that memory behind the scenes.
+
+### 🔍 What Causes Memory Leaks?
+
+Memory leaks happen when **data is no longer needed** but is still **held in memory**, making the app heavier over time. Common causes:
+
+- ❗ Forgotten timers or intervals
+- ❗ Detached DOM nodes
+- ❗ Closures keeping stale data
+- ❗ Global variables that stick forever
+
+### 🧪 Example 2: Leaking Memory via setInterval
+
+```javascript
+function startCounter() {
+  setInterval(() => {
+    console.log("Running forever...");
+  }, 1000);
+}
+```
+
+**💡 What’s happening:**
+
+- This `setInterval` runs **forever**, and its closure holds a reference to everything inside `startCounter`.
+- Even if `startCounter()` finishes, the memory stays tied up.
+- **🔧 Fix**: Clear the interval when it’s no longer needed with `clearInterval()`.
+
+### 🧪 Example 3: Detached DOM Nodes
+
+```javascript
+const container = document.getElementById("list");
+let tempDiv = document.createElement("div");
+tempDiv.textContent = "Temp";
+container.appendChild(tempDiv);
+container.removeChild(tempDiv); // Seems clean, right?
+```
+
+**💡 Why it’s a problem:**
+
+- If something in your code **still holds a reference** to `tempDiv`, like a variable or event listener, the browser **won’t garbage-collect it**.
+- **🔧 Fix**: Make sure to **null out references** and remove event listeners when nodes are removed.
+
+### ✅ Best Practices for Clean Memory
+
+- 🧹 Use `let` or `const` with clear scopes
+- 🧹 Remove event listeners and DOM references when elements are removed
+- 🧹 Clear intervals and timeouts
+- 🧹 Avoid global variables
+- 🧹 Watch for long-lived closures (e.g. in single-page apps)
+
+### ❌ Common Pitfalls
+
+| Pitfall                     | What It Causes                         | How to Avoid                              |
+| --------------------------- | -------------------------------------- | ----------------------------------------- |
+| Unused DOM still referenced | DOM nodes never get collected          | Use `null`, `removeEventListener()`       |
+| Intervals without cleanup   | Functions live forever in memory       | Always call `clearInterval()`             |
+| Oversized closures          | Unintentional references to large data | Isolate only what's needed in closures    |
+| Leaky third-party libs      | Hidden listeners or cache buildup      | Inspect with dev tools, detach on unmount |
+
+### 🧾 TL;DR
+
+| Term                   | Meaning                                     | Tip                                                 |
+| ---------------------- | ------------------------------------------- | --------------------------------------------------- |
+| **Garbage Collection** | Automatic removal of unreachable memory     | Happens behind the scenes, but not always perfectly |
+| **Memory Leak**        | Memory kept alive but no longer needed      | Most often caused by hanging references             |
+| **Reference**          | A variable or closure that keeps data alive | Use `null` or cleanup functions to break links      |
+
+<br>
+
+## 20.
