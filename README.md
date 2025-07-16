@@ -36,7 +36,8 @@ Best of luck on your **programming journey**—🙏✨ **Happy coding!** 🧑‍
 - [17. 🎯 Event _Delegation_ in JavaScript: Handle More with Less](#17--event-delegation-in-javascript-handle-more-with-less)
 - [18. 🎛️ Understanding Event Bubbling and Capturing in JavaScript](#18-️-understanding-event-bubbling-and-capturing-in-javascript)
 - [19. 🧠 Memory Management in JavaScript: How to Prevent Leaks and Optimize Your App](#19--memory-management-in-javascript-how-to-prevent-leaks-and-optimize-your-app)
-- [20.](#20)
+- [20. ⛓️ How JavaScript Handles Blocking vs. Non-Blocking Code](#20-️-how-javascript-handles-blocking-vs-non-blocking-code)
+- [21. 🧪 Writing Testable JavaScript: Pure Functions and Side Effects](#21--writing-testable-javascript-pure-functions-and-side-effects)
 
 ---
 
@@ -1425,4 +1426,231 @@ container.removeChild(tempDiv); // Seems clean, right?
 
 <br>
 
-## 20.
+## 20. ⛓️ How JavaScript Handles Blocking vs. Non-Blocking Code
+
+- **✅ Understand Synchronous and Asynchronous Execution**
+- **✅ Prevent UI Freezing and Lag**
+- **✅ Write Smooth, Scalable Code**
+
+### 🧠 Simple Analogy: One Lane vs. Multithreaded Thinking
+
+Imagine a person doing tasks one by one:
+
+- **Blocking code** is like waiting in line—you can’t move until the person ahead finishes.
+
+- **Non-blocking code** is like texting a friend while waiting for coffee—you’re able to keep doing other things without being stuck.
+
+JavaScript, by default, runs in a **single-threaded** environment. But thanks to its **event loop**, it handles asynchronous actions without freezing your app.
+
+### 🧪 Example 1: Blocking Code (Synchronous)
+
+```javascript
+console.log("Start");
+
+function heavyTask() {
+  for (let i = 0; i < 1e9; i++) {} // Simulates a CPU-heavy task
+}
+
+heavyTask();
+console.log("End");
+```
+
+**💡 Explanation:**
+
+- JavaScript executes `heavyTask()` before moving on.
+- The `console.log("End")` won’t run until `heavyTask` completes.
+- 🛑 This blocks the thread - nothing else can happen in the meantime.
+
+**📌 Happens often with:**
+
+- Large loops or computations
+- Sync file reading
+- Slow regex or JSON parsing
+
+### 🧪 Example 2: Non-Blocking Code (Asynchronous)
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Async Task");
+}, 1000);
+
+console.log("End");
+```
+
+**💡 Explanation:**
+
+- `setTimeout()` is deferred via the event loop, scheduled to run later.
+- `console.log("End")` happens immediately, without waiting.
+- ✅ This lets JavaScript continue executing other code while waiting for a task to complete.
+
+**📌 Common non-blocking patterns:**
+
+- `setTimeout` / `setInterval`
+- `Promises` / `async-await`
+- `fetch` and other I/O operations
+
+### 🔄 How the Event Loop Helps
+
+JavaScript uses:
+
+- **Call Stack**: Tracks functions being executed
+- **Web APIs / Tasks**: Offloads async functions like `setTimeout` and `fetch`
+- **Callback Queue**: Stores messages waiting to be processed
+- **Event Loop**: Continuously checks if the stack is empty and pushes queued tasks
+
+✅ This architecture lets JavaScript appear "multithreaded" even on a **single thread**, without blocking user interaction.
+
+### 🧪 Example 3: Mixing Blocking and Non-Blocking
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Delayed task");
+}, 0);
+
+for (let i = 0; i < 1e9; i++) {} // Blocking loop
+
+console.log("End");
+```
+
+**💡 Explanation:**
+
+- Even with a 0ms delay, the loop must finish before the `setTimeout` runs.
+- Shows how **blocking code still pauses async callbacks** until the stack clears.
+- Reminder: async is only helpful if **you avoid blocking tasks altogether**.
+
+### ❌ Common Pitfalls
+
+| Mistake                                  | Why It’s a Problem                | What to Do Instead                       |
+| ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| Mixing heavy sync logic with UI          | Makes buttons freeze or lag       | Offload with web workers or async chunks |
+| Assuming `setTimeout(..., 0)` is instant | Gets delayed if the stack is busy | Keep critical code light and fast        |
+| Blocking API data with sync loops        | UI remains stuck until data loads | Use `fetch`, Promises, or async-await    |
+
+### 🌍 Real-World Use Cases
+
+- Keeping UI responsive while fetching data
+- Animating while processing backend requests
+- Non-blocking form validation
+- Lazy loading content in single-page apps
+
+### 🧾 TL;DR
+
+| Type                     | Behavior                          | Use Case                                 |
+| ------------------------ | --------------------------------- | ---------------------------------------- |
+| **Blocking (Sync)**      | Waits for each step to finish     | Only use for simple, quick tasks         |
+| **Non-Blocking (Async)** | Frees up the thread while waiting | Essential for network, timers, smooth UX |
+
+<br>
+
+## 21. 🧪 Writing Testable JavaScript: Pure Functions and Side Effects
+
+- **✅ Make Bugs Easier to Catch**
+- **✅ Simplify Unit Testing**
+- **✅ Keep Your Logic Clean and Scalable**
+
+### 🧠 Simple Analogy: Lab vs. Kitchen
+
+A **pure function** is like a chemistry experiment—same ingredients, same result, no mess.
+A **function with side effects** is like cooking—chop onions and suddenly you’re crying, spilled sauce, and the fire alarm’s going off.
+
+If you want clean results, **keep your logic in the lab**. Add the messy stuff (side effects) only when needed—and isolate it.
+
+### 📦 What Is a Pure Function?
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+```
+
+**💡 Explanation:**
+
+- Takes input → returns output
+- Doesn’t change external variables, DOM, or state
+- No surprises, no dependencies—just math
+- 🔍 Easy to test: Same inputs will always return the same outputs
+
+### ⚡ What Is a Side Effect?
+
+```javascript
+let count = 0;
+
+function increment() {
+  count += 1;
+  console.log("Current count:", count);
+}
+```
+
+**💡 Explanation:**
+
+- Modifies `count` (global state)
+- Prints to console (external output)
+- ⚠️ Makes testing harder because output depends on outside variables and the environment
+
+### 🔧 Example: Refactor for Testability
+
+**Before - Hard to Test**
+
+```javascript
+function saveName(name) {
+  localStorage.setItem("user", name); // Direct side effect
+}
+```
+
+**After - Logic First, Side Effect Second**
+
+```javascript
+function getSavePayload(name) {
+  return { key: "user", value: name }; // Pure
+}
+
+function saveToStorage(payload) {
+  localStorage.setItem(payload.key, payload.value); // Side effect isolated
+}
+```
+
+**💡 Why This Matters:**
+
+- `getSavePayload()` is **predictable and easy to test**
+- You can **mock** `saveToStorage()` in integration tests
+- Keeps business logic and messy operations separated
+
+### 🧪 Example: Testing a Pure Function
+
+```javascript
+function calculateDiscount(price, percent) {
+  return price - price * (percent / 100);
+}
+// Test case
+console.log(calculateDiscount(100, 20)); // ✅ Always returns 80
+```
+
+- ✅ No logs
+- ✅ No DOM manipulation
+- ✅ No dependencies Just input → output. That’s testing gold.
+
+### ❌ Common Pitfalls
+
+| 🚩 Issue                            | 😵 Problem                     | ✅ Solution                            |
+| ----------------------------------- | ------------------------------ | -------------------------------------- |
+| Mixing UI logic with business rules | Makes unit testing a nightmare | Move calculations to a pure helper     |
+| Logging or mutating inside logic    | Pollutes test output           | Separate concerns—log outside the core |
+| Globals inside functions            | Makes behavior unpredictable   | Pass everything in via parameters      |
+
+### 🌍 Real-World Use Cases
+
+- Utility functions (calculations, validations, formatting)
+- Redux reducers and functional pipelines
+- Financial or form logic
+- Framework components with separated logic and effects
+
+### 🧾 TL;DR
+
+| 🔹 Concept        | 🔎 What It Means                           | 💡 Why It Matters                              |
+| ----------------- | ------------------------------------------ | ---------------------------------------------- |
+| **Pure Function** | No side effects, predictable output        | Easy to test, debug, and reuse                 |
+| **Side Effect**   | A change outside the function (DOM, state) | Keep separate for cleaner architecture & tests |
