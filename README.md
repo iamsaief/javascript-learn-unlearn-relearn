@@ -36,7 +36,7 @@ Best of luck on your **programming journey**—🙏✨ **Happy coding!** 🧑‍
 - [17. 🎯 Event **Delegation** in JavaScript: Handle More with Less](#17--event-delegation-in-javascript-handle-more-with-less)
 - [18. 🎛️ Understanding Event **Bubbling** and **Capturing** in JavaScript](#18-️-understanding-event-bubbling-and-capturing-in-javascript)
 - [19. 🧠 Memory Management in JavaScript: How to Prevent Leaks and Optimize Your App](#19--memory-management-in-javascript-how-to-prevent-leaks-and-optimize-your-app)
-- [20. ⛓️ How JavaScript Handles Blocking vs. Non-Blocking Code](#20-️-how-javascript-handles-blocking-vs-non-blocking-code)
+- [20. ⛓️ How JavaScript Handles Blocking vs. Non‑Blocking Code](#20-️-how-javascript-handles-blocking-vs-nonblocking-code)
 - [21. 🧪 Writing Testable JavaScript: Pure Functions and Side Effects](#21--writing-testable-javascript-pure-functions-and-side-effects)
 
 ---
@@ -1687,7 +1687,7 @@ Understanding how memory is allocated, retained, and released helps you write fa
 
 ### 💡 Simple Analogy: The Cluttered Desk
 
-Imagine your app is working at a desk:
+Imagine your're working at a desk:
 
 - You open files (variables), stack papers (DOM nodes), and load folders (objects).
 - If you never throw anything away, the desk gets buried.
@@ -1738,7 +1738,7 @@ let tempDiv = document.createElement("div");
 tempDiv.textContent = "Temporary";
 
 container.appendChild(tempDiv);
-container.removeChild(tempDiv); // Seems clean
+container.removeChild(tempDiv); // Clean up
 ```
 
 **💬 Explanation**
@@ -1773,123 +1773,115 @@ container.removeChild(tempDiv); // Seems clean
 
 <br>
 
-## 20. ⛓️ How JavaScript Handles Blocking vs. Non-Blocking Code
+## 20. ⛓️ How JavaScript Handles Blocking vs. Non‑Blocking Code
 
-- **✅ Understand Synchronous and Asynchronous Execution**
-- **✅ Prevent UI Freezing and Lag**
-- **✅ Write Smooth, Scalable Code**
+✅ _Understand Execution Order • Prevent UI Freezes • Write Smoother Async Code_
 
-### 🧠 Simple Analogy: One Lane vs. Multithreaded Thinking
+**🛠️ Introduction**
 
-Imagine a person doing tasks one by one:
+JavaScript runs on a **single thread** — it processes one task at a time. That means **blocking code** can freeze everything: the UI, event handling, and rendering. Thankfully, JavaScript handles **non-blocking tasks** via the **event loop**, letting long-running operations happen in the background without halting everything else.
 
-- **Blocking code** is like waiting in line—you can’t move until the person ahead finishes.
+### 💡 Simple Analogy: Checkout Counter at a Store
 
-- **Non-blocking code** is like texting a friend while waiting for coffee—you’re able to keep doing other things without being stuck.
+- **Blocking:** A customer pays in coins and counts them one by one. Everyone in line must wait.
+- **Non‑Blocking:** The cashier asks them to step aside and count while helping the next customer.
 
-JavaScript, by default, runs in a **single-threaded** environment. But thanks to its **event loop**, it handles asynchronous actions without freezing your app.
-
-### 🧪 Example 1: Blocking Code (Synchronous)
+### 📝 Example 1: Blocking Code (Synchronous)
 
 ```javascript
 console.log("Start");
 
 function heavyTask() {
-  for (let i = 0; i < 1e9; i++) {} // Simulates a CPU-heavy task
+  const start = Date.now();
+  while (Date.now() - start < 3000) {
+    // Simulating a 3-second heavy loop
+  }
+  console.log("Heavy task done");
 }
 
 heavyTask();
 console.log("End");
 ```
 
-**💡 Explanation:**
+**💬 Step-by-Step:**
 
-- JavaScript executes `heavyTask()` before moving on.
-- The `console.log("End")` won’t run until `heavyTask` completes.
-- 🛑 This blocks the thread - nothing else can happen in the meantime.
+1. `"Start"` is logged.
+2. `heavyTask()` runs and **blocks** everything for 3 seconds.
+3. `"End"` is logged **after** the heavy task finishes.
+4. During this time, UI updates, clicks, and renders are frozen.
 
-**📌 Happens often with:**
+> **🛠 Real‑world consequence:** Long calculations or synchronous loops in the main thread make your site feel frozen.
 
-- Large loops or computations
-- Sync file reading
-- Slow regex or JSON parsing
-
-### 🧪 Example 2: Non-Blocking Code (Asynchronous)
+### 📝 Example 2: Non‑Blocking Code with setTimeout
 
 ```javascript
 console.log("Start");
 
 setTimeout(() => {
-  console.log("Async Task");
-}, 1000);
+  console.log("Async Task Done");
+}, 3000);
 
 console.log("End");
 ```
 
-**💡 Explanation:**
+**💬 Step-by-Step:**
 
-- `setTimeout()` is deferred via the event loop, scheduled to run later.
-- `console.log("End")` happens immediately, without waiting.
-- ✅ This lets JavaScript continue executing other code while waiting for a task to complete.
+1. `"Start"` logs.
+2. `setTimeout` schedules the callback via the browser’s Web API.
+3. `"End"` logs **immediately**, without waiting for the 3 seconds.
+4. After the timer ends, the callback is pushed to the **callback queue** and run when the stack is clear.
 
-**📌 Common non-blocking patterns:**
+> **🛠 Real‑world benefit:** Your app stays responsive — users can still scroll, click, or type while waiting.
 
-- `setTimeout` / `setInterval`
-- `Promises` / `async-await`
-- `fetch` and other I/O operations
-
-### 🔄 How the Event Loop Helps
-
-JavaScript uses:
-
-- **Call Stack**: Tracks functions being executed
-- **Web APIs / Tasks**: Offloads async functions like `setTimeout` and `fetch`
-- **Callback Queue**: Stores messages waiting to be processed
-- **Event Loop**: Continuously checks if the stack is empty and pushes queued tasks
-
-✅ This architecture lets JavaScript appear "multithreaded" even on a **single thread**, without blocking user interaction.
-
-### 🧪 Example 3: Mixing Blocking and Non-Blocking
+### 📝 Example 3: Promises (Microtask Queue Priority)
 
 ```javascript
 console.log("Start");
 
-setTimeout(() => {
-  console.log("Delayed task");
-}, 0);
-
-for (let i = 0; i < 1e9; i++) {} // Blocking loop
+Promise.resolve().then(() => {
+  console.log("Promise Resolved");
+});
 
 console.log("End");
 ```
 
-**💡 Explanation:**
+**💬 Step-by-Step:**
 
-- Even with a 0ms delay, the loop must finish before the `setTimeout` runs.
-- Shows how **blocking code still pauses async callbacks** until the stack clears.
-- Reminder: async is only helpful if **you avoid blocking tasks altogether**.
+1. `"Start"` logs.
+2. Promise is resolved immediately, but `.then()` is put into the microtask queue.
+3. `"End"` logs.
+4. Before moving on to tasks like timeouts, microtasks run → **"Promise Resolved"**.
 
-### ❌ Common Pitfalls
-
-| Mistake                                  | Why It’s a Problem                | What to Do Instead                       |
-| ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| Mixing heavy sync logic with UI          | Makes buttons freeze or lag       | Offload with web workers or async chunks |
-| Assuming `setTimeout(..., 0)` is instant | Gets delayed if the stack is busy | Keep critical code light and fast        |
-| Blocking API data with sync loops        | UI remains stuck until data loads | Use `fetch`, Promises, or async-await    |
+> **🛠 Real‑world benefit:** Microtasks run faster than normal callbacks — ideal for quick, non-blocking updates in UI frameworks.
 
 ### 🌍 Real-World Use Cases
 
-- Keeping UI responsive while fetching data
-- Animating while processing backend requests
-- Non-blocking form validation
-- Lazy loading content in single-page apps
+**Blocking:**
+
+- Big loops for data transformation on the main thread
+- Synchronous file parsing in Node.js
+
+**Non‑Blocking:**
+
+- Fetching API data while keeping UI interactive
+- Animations running alongside async logic
+- Live form validation without freezing typing
+
+### ❌ Common Pitfalls
+
+| ❌ Mistake                               | ⚠️ Problem                                      | ✅ Fix It                                             |
+| ---------------------------------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| Heavy sync code in UI thread             | Freezes UI, poor user experience                | Move to Web Workers or break into smaller async tasks |
+| Assuming `setTimeout(..., 0)` is instant | It runs only after the call stack is clear      | Understand event loop ordering                        |
+| Ignoring microtask priority              | Can cause race conditions or wrong order output | Learn microtask vs callback queue                     |
 
 ### 🧾 TL;DR
 
-| Type                     | Behavior                          | Use Case                                 |
-| ------------------------ | --------------------------------- | ---------------------------------------- |
-| **Blocking (Sync)**      | Waits for each step to finish     | Only use for simple, quick tasks         |
-| **Non-Blocking (Async)** | Frees up the thread while waiting | Essential for network, timers, smooth UX |
+| 🔹 Concept       | 🔍 Description                             | 💡 When to Use                           |
+| ---------------- | ------------------------------------------ | ---------------------------------------- |
+| **Blocking**     | Code runs fully before moving on           | Quick tasks only — avoid for heavy logic |
+| **Non‑Blocking** | Delegates tasks, continues other work      | Network calls, timers, async UI updates  |
+| **Microtasks**   | Higher priority async callbacks (Promises) | Fast follow‑up work after current task   |
 
 <br>
 
