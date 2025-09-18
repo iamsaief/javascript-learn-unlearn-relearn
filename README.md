@@ -1887,109 +1887,137 @@ console.log("End");
 
 ## 21. 🧪 Writing Testable JavaScript: Pure Functions and Side Effects
 
-- **✅ Make Bugs Easier to Catch**
-- **✅ Simplify Unit Testing**
-- **✅ Keep Your Logic Clean and Scalable**
+**💡 Build predictable logic • 🧹 Isolate side effects • 🧪 Make testing effortless**
 
-### 🧠 Simple Analogy: Lab vs. Kitchen
+**🛠️ Introduction**
 
-A **pure function** is like a chemistry experiment—same ingredients, same result, no mess.
-A **function with side effects** is like cooking—chop onions and suddenly you’re crying, spilled sauce, and the fire alarm’s going off.
+If you want JavaScript code that’s **easy to test, debug, and maintain**, you need to understand two things:
 
-If you want clean results, **keep your logic in the lab**. Add the messy stuff (side effects) only when needed—and isolate it.
+- **Pure functions** → Always give the same output for the same input, and don’t mess with anything outside their scope.
+- **Side effects** → Anything your function does that affects the outside world (DOM changes, API calls, logging, modifying global variables, etc.).
 
-### 📦 What Is a Pure Function?
+The trick? **Put your core logic in pure functions, and keep side effects at the edges** — so you can test the logic without worrying about the messy stuff.
 
-```javascript
-function add(a, b) {
-  return a + b;
-}
-```
+### 💡 Simple Analogy: The Chef and the Waiter 🍳🛎️
 
-**💡 Explanation:**
+- **Pure function = Chef in the kitchen** → You give them the same ingredients, they cook the same dish every time. No surprises.
+- **Side effect = Waiter in the dining area** → They interact with customers, deliver food, take orders — unpredictable things happen.
 
-- Takes input → returns output
-- Doesn’t change external variables, DOM, or state
-- No surprises, no dependencies—just math
-- 🔍 Easy to test: Same inputs will always return the same outputs
+**Rule for clean code:** Let the chef (pure logic) do the cooking, and the waiter (side effects) handle the outside world. Don’t mix them up.
 
-### ⚡ What Is a Side Effect?
+### 📝 Example 1: Pure vs Impure Function
 
 ```javascript
-let count = 0;
-
-function increment() {
-  count += 1;
-  console.log("Current count:", count);
-}
-```
-
-**💡 Explanation:**
-
-- Modifies `count` (global state)
-- Prints to console (external output)
-- ⚠️ Makes testing harder because output depends on outside variables and the environment
-
-### 🔧 Example: Refactor for Testability
-
-**Before - Hard to Test**
-
-```javascript
-function saveName(name) {
-  localStorage.setItem("user", name); // Direct side effect
-}
-```
-
-**After - Logic First, Side Effect Second**
-
-```javascript
-function getSavePayload(name) {
-  return { key: "user", value: name }; // Pure
-}
-
-function saveToStorage(payload) {
-  localStorage.setItem(payload.key, payload.value); // Side effect isolated
-}
-```
-
-**💡 Why This Matters:**
-
-- `getSavePayload()` is **predictable and easy to test**
-- You can **mock** `saveToStorage()` in integration tests
-- Keeps business logic and messy operations separated
-
-### 🧪 Example: Testing a Pure Function
-
-```javascript
+// ✅ Pure function
 function calculateDiscount(price, percent) {
   return price - price * (percent / 100);
 }
-// Test case
-console.log(calculateDiscount(100, 20)); // ✅ Always returns 80
+
+// ❌ Impure function
+let taxRate = 7; // global dependency
+
+function calculateTotal(price) {
+  console.log("Calculating total..."); // side effect
+  return price + price * (taxRate / 100);
+}
 ```
 
-- ✅ No logs
-- ✅ No DOM manipulation
-- ✅ No dependencies Just input → output. That’s testing gold.
+#### 💬 Explanation:
 
-### ❌ Common Pitfalls
+1. `calculateDiscount` → No globals, no logs, no DOM changes. Same input → same output.
+2. `calculateTotal` → Reads a global (`taxRate`) and logs to console (side effect).
+3. Pure functions are **predictable** and **easy to test**. Impure ones are harder to control.
 
-| 🚩 Issue                            | 😵 Problem                     | ✅ Solution                            |
-| ----------------------------------- | ------------------------------ | -------------------------------------- |
-| Mixing UI logic with business rules | Makes unit testing a nightmare | Move calculations to a pure helper     |
-| Logging or mutating inside logic    | Pollutes test output           | Separate concerns—log outside the core |
-| Globals inside functions            | Makes behavior unpredictable   | Pass everything in via parameters      |
+### 📝 Example 2: Refactoring for Testability (Dependency Injection)
 
-### 🌍 Real-World Use Cases
+```javascript
+// Before ❌ Hard to test
+function saveUser(name) {
+  localStorage.setItem("user", name); // direct side effect
+}
 
-- Utility functions (calculations, validations, formatting)
-- Redux reducers and functional pipelines
-- Financial or form logic
-- Framework components with separated logic and effects
+// After ✅ Logic separated from effect
+function createUserPayload(name) {
+  return { key: "user", value: name }; // pure
+}
+
+function saveToStorage(storage, payload) {
+  storage.setItem(payload.key, payload.value); // effect
+}
+
+// Usage in app
+const payload = createUserPayload("Alice");
+saveToStorage(localStorage, payload);
+
+// Usage in tests
+const mockStorage = { setItem: jest.fn() };
+saveToStorage(mockStorage, { key: "user", value: "Alice" });
+```
+
+#### 💬 Explanation:
+
+1. **Separate logic** → `createUserPayload` is pure.
+2. **Inject dependencies** → Pass `storage` into `saveToStorage`.
+3. **Test easily** → Replace `localStorage` with a mock in tests.
+
+### 📝 Example 3: Pure Core + Impure Boundary (API Fetch)
+
+```javascript
+// Pure transformation
+function mapPosts(posts) {
+  return posts.map((p) => ({
+    id: p.id,
+    title: p.title.trim(),
+    preview: p.body.slice(0, 100),
+  }));
+}
+
+// Impure boundary
+async function fetchPosts(fetchImpl) {
+  const res = await fetchImpl("https://api.example.com/posts");
+  const data = await res.json();
+  return mapPosts(data); // pure logic here
+}
+
+// App usage
+fetchPosts(fetch).then(renderPosts);
+
+// Test usage
+const fakeFetch = async () => ({
+  json: async () => [{ id: 1, title: " Hello ", body: "..." }],
+});
+fetchPosts(fakeFetch).then((result) => console.log(result));
+```
+
+#### 💬 Explanation:
+
+1. `mapPosts` → Pure, transforms data only.
+2. `fetchPosts` → Handles side effect (network call).
+3. In tests → Replace `fetch` with a fake function.
+
+### 🌍 Real‑world use cases
+
+| 🧩 Scenario        | 🧪 Pure function        | ⚡ Side effect                |
+| ------------------ | ----------------------- | ----------------------------- |
+| 🛒 Shopping cart   | Calculate total price   | Save cart to localStorage     |
+| ✅ Form validation | Check if email is valid | Show error message in the DOM |
+| 🔄 Data processing | Transform API response  | Fetch data from API           |
+| 🎮 Game logic      | Compute next move       | Play sound / update canvas    |
+
+### ❌ Common pitfalls
+
+| ⚠️ Mistake                | 😵 Why it’s bad                                    | ✅ Fix                                                   |
+| ------------------------- | -------------------------------------------------- | -------------------------------------------------------- |
+| 🔀 Mixing logic & effects | Hard to test, unpredictable behavior               | Separate pure logic from effect wrappers                 |
+| 🌍 Using globals in logic | Tests depend on environment                        | Pass values as parameters (inject deps)                  |
+| ✏️ Mutating inputs        | Breaks predictability and referential transparency | Return new values (immutability)                         |
+| 🔗 Hardcoded dependencies | Can’t mock in tests                                | Use dependency injection (pass `fetch`, `storage`, etc.) |
 
 ### 🧾 TL;DR
 
-| 🔹 Concept        | 🔎 What It Means                           | 💡 Why It Matters                              |
-| ----------------- | ------------------------------------------ | ---------------------------------------------- |
-| **Pure Function** | No side effects, predictable output        | Easy to test, debug, and reuse                 |
-| **Side Effect**   | A change outside the function (DOM, state) | Keep separate for cleaner architecture & tests |
+| 🧠 Concept                        | 🔍 Description                                         | 💡 Why it matters                            |
+| --------------------------------- | ------------------------------------------------------ | -------------------------------------------- |
+| ✅ Pure function                  | Same input → same output, no side effects              | Easy to test, predictable, refactor‑friendly |
+| 🌊 Side effect                    | Changes outside the return value (DOM, API, time, I/O) | Must be isolated and controlled              |
+| 🔌 Dependency injection           | Pass dependencies as arguments                         | Enables mocking and fast, reliable tests     |
+| 🧱 Pure core + 🌐 impure boundary | Logic stays pure; effects live at the edges            | Clean architecture, maintainable code        |
