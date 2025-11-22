@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="60" src="https://img.icons8.com/color/344/javascript.png">
+  <img height="60" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" />
   <h1>JavaScript: Learn Unlearn & Relearn 🔄</h1>
 </div>
 
